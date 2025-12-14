@@ -19,17 +19,14 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             const SizedBox(height: 30),
 
-            // Username label
             const Text(
               "Username",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
 
-            // Username field
             TextField(
               controller: usernameController,
               decoration: InputDecoration(
@@ -42,14 +39,12 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // Email label
             const Text(
               "Email",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
 
-            // Email field
             TextField(
               controller: emailController,
               decoration: InputDecoration(
@@ -62,14 +57,12 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // Password label
             const Text(
               "Password",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
 
-            // Password field
             TextField(
               controller: passwordController,
               obscureText: true,
@@ -83,15 +76,25 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Register button
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  print("Username: ${usernameController.text}");
-                  print("Email: ${emailController.text}");
-                  print("Password: ${passwordController.text}");
+
+                  if (usernameController.text.isEmpty ||
+                      emailController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Please fill in all fields"),
+                      ),
+                    );
+                    return;
+                  }
+
+
+                  Navigator.pop(context); // back to login
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,

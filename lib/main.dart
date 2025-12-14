@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'register_page.dart';
+import 'profile_page.dart';
+import 'my_events_page.dart';
+import 'create_event_page.dart';
+import 'friends_page.dart';
+import 'conversations_page.dart';
+import 'chat_page.dart';
+
+
+
+
+
+
 
 void main() {
   runApp(LocalEventBuddy());
@@ -17,6 +29,13 @@ class LocalEventBuddy extends StatelessWidget {
         '/': (context) => MainPage(),
         '/login': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
+        '/profile': (context) => const ProfilePage(),
+        '/my_events': (context) => const MyEventsPage(),
+        '/create_event': (context) => const CreateEventPage(),
+        '/friends': (context) => const FriendsPage(),
+        '/conversations': (context) => const ConversationsPage(),
+        '/chat': (context) => const ChatPage(),
+
       },
     );
   }

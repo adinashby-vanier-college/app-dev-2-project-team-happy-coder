@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  // Controllers to read input values
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -19,17 +18,14 @@ class LoginPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             const SizedBox(height: 40),
 
-            // Email label
             const Text(
               "Email",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
 
-            // Email field
             TextField(
               controller: emailController,
               decoration: InputDecoration(
@@ -42,14 +38,12 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // Password label
             const Text(
               "Password",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
 
-            // Password field
             TextField(
               controller: passwordController,
               obscureText: true,
@@ -63,15 +57,24 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 40),
 
-            // Login button
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  // TEMPORARY: Just print for now
-                  print("Email: ${emailController.text}");
-                  print("Password: ${passwordController.text}");
+
+                  if (emailController.text.isEmpty ||
+                      passwordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Please fill in all fields"),
+                      ),
+                    );
+                    return;
+                  }
+
+
+                  Navigator.pushNamed(context, '/profile');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
@@ -80,7 +83,10 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text("Log In", style: TextStyle(fontSize: 18)),
+                child: const Text(
+                  "Log In",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
           ],
