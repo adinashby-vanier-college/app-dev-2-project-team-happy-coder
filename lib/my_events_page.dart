@@ -12,17 +12,17 @@ class _MyEventsPageState extends State<MyEventsPage> {
     {
       "title": "Basketball Game",
       "category": "Sports",
-      "date": "Jan 20, 2025",
+      "date": "april 20, 2026",
     },
     {
       "title": "Study Group - Math",
       "category": "Education",
-      "date": "Jan 22, 2025",
+      "date": "september 22, 2026",
     },
     {
       "title": "Evening Social Meetup",
       "category": "Social",
-      "date": "Jan 25, 2025",
+      "date": "Mars 25, 2026",
     },
   ];
 
