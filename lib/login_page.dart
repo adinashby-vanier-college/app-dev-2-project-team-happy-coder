@@ -11,83 +11,50 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Log In"),
-        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 40),
-
             const Text(
               "Email",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
-                hintText: "Enter your email",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "email@example.com",
               ),
             ),
-
-            const SizedBox(height: 25),
-
+            const SizedBox(height: 16),
             const Text(
               "Password",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Enter your password",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "********",
               ),
             ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                final email = emailController.text.trim();
 
-            const SizedBox(height: 40),
-
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-
-                  if (emailController.text.isEmpty ||
-                      passwordController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Please fill in all fields"),
-                      ),
-                    );
-                    return;
-                  }
-
-
-                  Navigator.pushNamed(context, '/profile');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  "Log In",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
+                Navigator.pushNamed(
+                  context,
+                  '/profile',
+                  arguments: email,
+                );
+              },
+              child: const Text("Log In"),
             ),
           ],
         ),

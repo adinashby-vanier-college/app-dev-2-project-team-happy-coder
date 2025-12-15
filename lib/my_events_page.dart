@@ -1,35 +1,99 @@
 import 'package:flutter/material.dart';
 
-class MyEventsPage extends StatelessWidget {
+class MyEventsPage extends StatefulWidget {
   const MyEventsPage({super.key});
 
   @override
+  State<MyEventsPage> createState() => _MyEventsPageState();
+}
+
+class _MyEventsPageState extends State<MyEventsPage> {
+  final List<Map<String, String>> events = [
+    {
+      "title": "Basketball Game",
+      "category": "Sports",
+      "date": "Jan 20, 2025",
+    },
+    {
+      "title": "Study Group - Math",
+      "category": "Education",
+      "date": "Jan 22, 2025",
+    },
+    {
+      "title": "Evening Social Meetup",
+      "category": "Social",
+      "date": "Jan 25, 2025",
+    },
+  ];
+
+  void editEvent(int index) {
+    final titleController =
+    TextEditingController(text: events[index]["title"]);
+    final categoryController =
+    TextEditingController(text: events[index]["category"]);
+    final dateController =
+    TextEditingController(text: events[index]["date"]);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Edit Event"),
+        content: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                decoration: const InputDecoration(labelText: "Title"),
+              ),
+              TextField(
+                controller: categoryController,
+                decoration: const InputDecoration(labelText: "Category"),
+              ),
+              TextField(
+                controller: dateController,
+                decoration: const InputDecoration(labelText: "Date"),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                events[index] = {
+                  "title": titleController.text,
+                  "category": categoryController.text,
+                  "date": dateController.text,
+                };
+              });
+              Navigator.pop(context);
+            },
+            child: const Text("Save"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    final List<Map<String, String>> events = [
-      {
-        "title": "Basketball Game",
-        "category": "Sports",
-        "date": "Mars 20, 2026",
-      },
-      {
-        "title": "Study Group - Math",
-        "category": "Education",
-        "date": "April 22, 2026",
-      },
-      {
-        "title": "Football Game",
-        "category": "Sports",
-        "date": "Feb 25, 2026",
-      },
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Events"),
         centerTitle: true,
       ),
-      body: ListView.builder(
+      body: events.isEmpty
+          ? const Center(
+        child: Text(
+          "No events yet",
+          style: TextStyle(fontSize: 16, color: Colors.grey),
+        ),
+      )
+          : ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: events.length,
         itemBuilder: (context, index) {
@@ -48,12 +112,24 @@ class MyEventsPage extends StatelessWidget {
               ),
               subtitle: Text(
                 "${event['category']} • ${event['date']}",
-                style: const TextStyle(color: Colors.grey),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                print("Selected event: ${event["title"]}");
-              },
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: Colors.blue),
+                    onPressed: () => editEvent(index),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      setState(() {
+                        events.removeAt(index);
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -61,3 +137,4 @@ class MyEventsPage extends StatelessWidget {
     );
   }
 }
+

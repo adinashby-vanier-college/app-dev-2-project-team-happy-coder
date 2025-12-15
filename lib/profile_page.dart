@@ -5,91 +5,54 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String email =
+    ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("My Profile"),
-        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-
-            const SizedBox(height: 30),
-
-
             const CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.grey,
-              child: Icon(Icons.person, size: 60, color: Colors.white),
+              radius: 40,
+              child: Icon(Icons.person, size: 40),
             ),
-
-            const SizedBox(height: 16),
-
-
+            const SizedBox(height: 12),
             const Text(
-              "Username Placeholder",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              "Username",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-
-            const SizedBox(height: 8),
-
-
-            const Text(
-              "email@example.com",
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+            const SizedBox(height: 4),
+            Text(
+              email,
+              style: const TextStyle(color: Colors.grey),
             ),
-
             const SizedBox(height: 40),
 
-
-            _menuButton(context, "My Events", '/my_events'),
-            _menuButton(context, "Create Event", '/create_event'),
-            _menuButton(context, "Friends List", '/friends'),
-            _menuButton(context, "Conversations", '/conversations'),
-
-            const Spacer(),
-
-
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: OutlinedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.red),
-                ),
-                child: const Text(
-                  "Log Out",
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-            )
+            _menuButton(context, "My Events", "/my_events"),
+            _menuButton(context, "Create Event", "/create_event"),
+            _menuButton(context, "Friends List", "/friends"),
+            _menuButton(context, "Conversations", "/conversations"),
           ],
         ),
       ),
     );
   }
 
-
   Widget _menuButton(BuildContext context, String label, String route) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: SizedBox(
-        width: double.infinity,
-        height: 50,
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, route);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
-          ),
-          child: Text(label),
+      padding: const EdgeInsets.only(bottom: 12),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, route);
+        },
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50),
         ),
+        child: Text(label),
       ),
     );
   }

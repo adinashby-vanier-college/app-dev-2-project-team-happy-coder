@@ -12,7 +12,7 @@ class _ChatPageState extends State<ChatPage> {
 
 
   final List<Map<String, dynamic>> messages = [
-    {"text": "Hi?", "isMe": false},
+    {"text": "Hi", "isMe": false},
     {"text": "Are you willing to help us for this game?", "isMe": true},
     {"text": "Alright.", "isMe": false},
   ];
