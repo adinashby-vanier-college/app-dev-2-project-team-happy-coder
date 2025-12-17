@@ -7,6 +7,7 @@ import 'create_event_page.dart';
 import 'friends_page.dart';
 import 'conversations_page.dart';
 import 'chat_page.dart';
+import 'package:happycoder_project/theme/app_colors.dart';
 
 
 
@@ -45,7 +46,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.homeBg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
