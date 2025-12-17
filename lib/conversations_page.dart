@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:happycoder_project/theme/app_colors.dart';
 
 class ConversationsPage extends StatelessWidget {
   const ConversationsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final List<Map<String, String>> conversations = [
       {
         "name": "Alexander",
@@ -34,36 +34,39 @@ class ConversationsPage extends StatelessWidget {
         title: const Text("Conversations"),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: conversations.length,
-        itemBuilder: (context, index) {
-          final convo = conversations[index];
+      body: Container(
+        color: AppColors.chatBg,
+        child: ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: conversations.length,
+          itemBuilder: (context, index) {
+            final convo = conversations[index];
 
-          return Card(
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            margin: const EdgeInsets.only(bottom: 16),
-            child: ListTile(
-              leading: const CircleAvatar(
-                backgroundColor: Colors.black,
-                child: Icon(Icons.person, color: Colors.white),
+            return Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              title: Text(convo["name"]!),
-              subtitle: Text(convo["lastMessage"]!),
-              trailing: Text(
-                convo["time"]!,
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
+              margin: const EdgeInsets.only(bottom: 16),
+              child: ListTile(
+                leading: const CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.person, color: Colors.white),
+                ),
+                title: Text(convo["name"]!),
+                subtitle: Text(convo["lastMessage"]!),
+                trailing: Text(
+                  convo["time"]!,
+                  style:
+                  const TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/chat');
+                },
               ),
-              onTap: () {
-                Navigator.pushNamed(context, '/chat');
-              },
-
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

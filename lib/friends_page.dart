@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happycoder_project/theme/app_colors.dart';
 
 class FriendsPage extends StatefulWidget {
   const FriendsPage({super.key});
@@ -22,43 +23,46 @@ class _FriendsPageState extends State<FriendsPage> {
         title: const Text("Friends List"),
         centerTitle: true,
       ),
-      body: friends.isEmpty
-          ? const Center(
-        child: Text(
-          "No friends yet",
-          style: TextStyle(fontSize: 16, color: Colors.grey),
-        ),
-      )
-          : ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: friends.length,
-        itemBuilder: (context, index) {
-          final friend = friends[index];
+      body: Container(
+        color: AppColors.profileBg,
+        child: friends.isEmpty
+            ? const Center(
+          child: Text(
+            "No friends yet",
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        )
+            : ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: friends.length,
+          itemBuilder: (context, index) {
+            final friend = friends[index];
 
-          return Card(
-            margin: const EdgeInsets.only(bottom: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 2,
-            child: ListTile(
-              leading: const CircleAvatar(
-                backgroundColor: Colors.black,
-                child: Icon(Icons.person, color: Colors.white),
+            return Card(
+              margin: const EdgeInsets.only(bottom: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              title: Text(friend["name"]!),
-              subtitle: Text(friend["status"]!),
-              trailing: IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
-                onPressed: () {
-                  setState(() {
-                    friends.removeAt(index);
-                  });
-                },
+              elevation: 2,
+              child: ListTile(
+                leading: const CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.person, color: Colors.white),
+                ),
+                title: Text(friend["name"]!),
+                subtitle: Text(friend["status"]!),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete, color: Colors.red),
+                  onPressed: () {
+                    setState(() {
+                      friends.removeAt(index);
+                    });
+                  },
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

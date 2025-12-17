@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happycoder_project/theme/app_colors.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -12,31 +13,34 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("My Profile"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const CircleAvatar(
-              radius: 40,
-              child: Icon(Icons.person, size: 40),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              "Username",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              email,
-              style: const TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 40),
+      body: Container(
+        color: AppColors.profileBg,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const CircleAvatar(
+                radius: 40,
+                child: Icon(Icons.person, size: 40),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                "Username",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                email,
+                style: const TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 40),
 
-            _menuButton(context, "My Events", "/my_events"),
-            _menuButton(context, "Create Event", "/create_event"),
-            _menuButton(context, "Friends List", "/friends"),
-            _menuButton(context, "Conversations", "/conversations"),
-          ],
+              _menuButton(context, "My Events", "/my_events"),
+              _menuButton(context, "Create Event", "/create_event"),
+              _menuButton(context, "Friends List", "/friends"),
+              _menuButton(context, "Conversations", "/conversations"),
+            ],
+          ),
         ),
       ),
     );

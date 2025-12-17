@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happycoder_project/theme/app_colors.dart';
 
 class MyEventsPage extends StatefulWidget {
   const MyEventsPage({super.key});
@@ -86,55 +87,60 @@ class _MyEventsPageState extends State<MyEventsPage> {
         title: const Text("My Events"),
         centerTitle: true,
       ),
-      body: events.isEmpty
-          ? const Center(
-        child: Text(
-          "No events yet",
-          style: TextStyle(fontSize: 16, color: Colors.grey),
-        ),
-      )
-          : ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          final event = events[index];
+      body: Container(
+        color: AppColors.eventBg,
+        child: events.isEmpty
+            ? const Center(
+          child: Text(
+            "No events yet",
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        )
+            : ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: events.length,
+          itemBuilder: (context, index) {
+            final event = events[index];
 
-          return Card(
-            margin: const EdgeInsets.only(bottom: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 3,
-            child: ListTile(
-              title: Text(
-                event["title"]!,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+            return Card(
+              margin: const EdgeInsets.only(bottom: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              subtitle: Text(
-                "${event['category']} • ${event['date']}",
+              elevation: 3,
+              child: ListTile(
+                title: Text(
+                  event["title"]!,
+                  style:
+                  const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  "${event['category']} • ${event['date']}",
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon:
+                      const Icon(Icons.edit, color: Colors.blue),
+                      onPressed: () => editEvent(index),
+                    ),
+                    IconButton(
+                      icon:
+                      const Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        setState(() {
+                          events.removeAt(index);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.blue),
-                    onPressed: () => editEvent(index),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {
-                      setState(() {
-                        events.removeAt(index);
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
 }
-

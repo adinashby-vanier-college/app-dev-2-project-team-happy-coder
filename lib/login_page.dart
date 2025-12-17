@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happycoder_project/theme/app_colors.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -12,51 +13,54 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Log In"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              "Email",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "email@example.com",
+      body: Container(
+        color: AppColors.authBg,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                "Email",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              "Password",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "********",
+              const SizedBox(height: 8),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "email@example.com",
+                ),
               ),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                final email = emailController.text.trim();
+              const SizedBox(height: 16),
+              const Text(
+                "Password",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "********",
+                ),
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {
+                  final email = emailController.text.trim();
 
-                Navigator.pushNamed(
-                  context,
-                  '/profile',
-                  arguments: email,
-                );
-              },
-              child: const Text("Log In"),
-            ),
-          ],
+                  Navigator.pushNamed(
+                    context,
+                    '/profile',
+                    arguments: email,
+                  );
+                },
+                child: const Text("Log In"),
+              ),
+            ],
+          ),
         ),
       ),
     );
